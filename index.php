@@ -13,11 +13,7 @@
     <meta name="description" content="">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js
-
-
-
-    "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
 
     <title>AddCase | Home</title>
 </head>
@@ -35,14 +31,14 @@
   <hr class="hr">
   <h1 class="menu-m-t">Наявність</h1>
   <ul class="ul">
-    <li class="menu-li">Чохли</li>
+    <li class="menu-li" onclick="document.location='index.php'">Чохли</li>
     <li class="menu-li">Зарядки</li>
     <li class="menu-li">Скло</li>
   </ul>
     <hr class="hr">
   <h1 class="menu-m-t">Продані</h1>
   <ul class="ul">
-    <li class="menu-li">Чохли</li>
+    <li class="menu-li" onclick="document.location='sold_cases.php'">Чохли</li>
     <li class="menu-li">Зарядки</li>
     <li class="menu-li">Скло</li>
   </ul>
@@ -59,7 +55,7 @@
       <input type="text" id="search" placeholder="Search..." onkeyup="tableSearch()" /><span></span>
     </div>
 
-    <div class="limiter">
+<div class="limiter">
   <div class="container-table100">
     <div class="wrap-table100">
       <div class="table100 ver1 m-b-110">
@@ -70,6 +66,7 @@
                 <th class="cell100 column1">#</th>
                 <th class="cell100 column2">Тип та назва чохла</th>
                 <th class="cell100 column3">Колір</th>
+                <th class="cell100 column4">Код</th>
                 <th class="cell100 column4">Дата</th>
                 <th class="cell100 column5">₴ Ціна</th>
               </tr>
@@ -77,7 +74,7 @@
           </table>
         </div>
 
-        <div class="table100-body js-pscroll">
+<div class="table100-body js-pscroll">
           <?php
 
 //<input type="text" checked="checked" class="form-control" id="search" placeholder="Search..." onkeyup="tableSearch()">
@@ -86,7 +83,7 @@ require "connect.php";
 echo '<table class="table table-hover table-sm" , id="info-table", width="500">  <tr>';
 echo "<tbody>";
 
-$query = "SELECT * , concat(`type_case`,' ',`case_brand`,' ', `phone_brand`,' ', `phone_model`) as 'concat-name' FROM `cases` ORDER by id DESC ";
+$query = "SELECT `id`, concat(`case_type`,' ',`case_brand`,' ',`phone_brand`,' ',`phone_model`)as'content',`color`,`cod`,`date`,`first_price` FROM `all_avaible_goods` WHERE `type_good` like 'Чохол' Order BY id DESC ";
 $i=0;
 
 //$numrows = mysqli_num_rows( $query);
@@ -96,10 +93,11 @@ if ($result = mysqli_query($mysql, $query)) {
       echo  '<tr class="row100 body">'.
       '<td class="cell100 column1">'.
       $row["id"].'<td class="cell100 column2">'.
-      $row["concat-name"].'<td class="cell100 column3">'.
+      $row["content"].'<td class="cell100 column3">'.
       $row["color"].'<td class="cell100 column4">'.
+      $row["cod"].'<td class="cell100 column4">'.
       $row["date"].'<td class="cell100 column5">'.
-      $row["price"].' ₴'.
+      $row["first_price"].' ₴'.
 
       '</tr> ';
   }
@@ -112,147 +110,121 @@ echo "</div>";
 mysqli_close($mysql);
 ?>
 
-      </div>
+</div>
 
 
 
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+<div class="right-side">
+  <div class="right-form">
+    <h1 class="selector-case-existing" id="t_switch">Існуючий</h1>
+      <div class="div-checkbox">
+
+<nav>
+  <input type="checkbox"  id="switch" onclick="myFunction()" /><label for="switch">Toggle</label>
+</nav>
+  </div>
+    <div id="first-page">
+      <h1 class="top-text-new-r-case" id='text1'>Додати Новий чохол </h1>
+        <form class="input-right-form" action="check-new-cases.php" method="post">
+          <input class="from-input" required type="text" name ="type_good" placeholder=" Тип товару">
+          <input class="from-input" required type="text" name ="case_type" placeholder=" Тип Чохла">
+          <input class="from-input" required type="text" name ="case_brand" placeholder=" Бренд Чохла">
+          <input class="from-input" required type="text" name ="phone_brand" placeholder=" Марка телефона ">
+          <input class="from-input" required type="text" name ="phone_model" placeholder=" Модель">
+          <input class="from-input" required type="text" name ="color" placeholder=" Колір ">
+          <input class="from-input" required type="text" name ="cod" placeholder="Код">
+          <input class="from-input-date" required type="date" name ="date" placeholder="">
+          <input class="from-input" required type="text" name ="first_price" placeholder=" ₴Ціна">
+          <input class="from-input-submit" type="submit" placeholder="">
+        </form>
     </div>
-  </div>
-  </div>
-  </div>
+    <div id="second-page">
+      <h1 class="top-text-new-r-case">Додати Існуючий чохол </h1>
+      <form class="input-right-form" action="check-new-cases.php" method="post">
+<?php
+require "connect.php";
+      echo '<select class="select"  name="type_good">';
+      echo '<option  class="option" selected disabled>Тип товару</option>';
+      $query = "SELECT DISTINCT `type_good` AS 'type_good' FROM `all_goods`WHERE `type_good` like 'Чохол' ";
+          if($result = mysqli_query($mysql,$query)){
+              while($row = mysqli_fetch_assoc($result)){
+                  echo '<option class="option">'.$row["type_good"].'</option>';
+              }
+              mysqli_free_result($result); // видалення
+  }
+    echo '</select>';
+
+      echo '<select class="select"  name="case_type">';
+      echo '<option  class="option" selected disabled>Тип чохла</option>';
+      $query = "SELECT DISTINCT `case_type` AS 'case_type' FROM `all_goods` WHERE `type_good` like 'Чохол'";
+          if($result = mysqli_query($mysql,$query)){
+              while($row = mysqli_fetch_assoc($result)){
+                  echo '<option class="option">'.$row["case_type"].'</option>';
+              }
+              mysqli_free_result($result); // видалення
+  }
+    echo '</select>';
 
 
-    <div class="right-side">
-      <div class="right-form">
+      echo '<select class="select"  name="case_brand">';
+      echo '<option  class="option" selected disabled>Бренд Чохла </option>';
+      $query = "SELECT DISTINCT `case_brand` AS 'case_brand' FROM `all_goods`WHERE `type_good` like 'Чохол' ";
+          if($result = mysqli_query($mysql,$query)){
+              while($row = mysqli_fetch_assoc($result)){
+                  echo '<option class="option">'.$row["case_brand"].'</option>';
+              }
+              mysqli_free_result($result); // видалення
+  }
+    echo '</select>';
+
+      echo '<select class="select"  name="phone_brand">';
+      echo '<option  class="option" selected disabled>Марка телефона</option>';
+      $query = "SELECT DISTINCT `phone_brand` AS 'phone_brand' FROM `all_goods`WHERE `type_good` like 'Чохол' ";
+          if($result = mysqli_query($mysql,$query)){
+              while($row = mysqli_fetch_assoc($result)){
+                  echo '<option class="option">'.$row["phone_brand"].'</option>';
+              }
+              mysqli_free_result($result); // видалення
+  }
+    echo '</select>';
+
+      echo '<select class="select"  name="phone_model">';
+      echo '<option  class="option" selected disabled>Модель</option>';
+      $query = "SELECT DISTINCT `phone_model` AS 'phone_model' FROM `all_goods`WHERE `type_good` like 'Чохол' ";
+          if($result = mysqli_query($mysql,$query)){
+              while($row = mysqli_fetch_assoc($result)){
+                  echo '<option class="option">'.$row["phone_model"].'</option>';
+              }
+              mysqli_free_result($result); // видалення
+  }
+    echo '</select>';
+
+      echo '<select class="select"  name="color">';
+      echo '<option  class="option" selected disabled>Колір</option>';
+      $query = "SELECT DISTINCT `color` AS 'color' FROM `all_goods`WHERE `type_good` like 'Чохол' ";
+          if($result = mysqli_query($mysql,$query)){
+              while($row = mysqli_fetch_assoc($result)){
+                  echo '<option class="option">'.$row["color"].'</option>';
+              }
+              mysqli_free_result($result); // видалення
+  }
+    echo '</select>';
+  echo '<input class="from-input" required type="text" name ="cod" placeholder="Код">';
 
 
-      <h1 class="selector-case-existing" id="t_switch">Існуючий</h1>
-  <div class="div-checkbox">
+echo'<input class="from-input-date" name="date" type="date" placeholder="">';
 
 
-  <nav>
 
-    <input type="checkbox"  id="switch" onclick="myFunction()" /><label for="switch">Toggle</label>
-  </nav>
-  </div>
-    <div id="new-case">
-    <h1 class="top-text-new-r-case" id='text1'>Додати Новий чохол </h1>
-    <form class="input-right-form" action="check-new-cases.php" method="post">
+echo'<input class="from-input" name="first_price" type="text" placeholder="₴Ціна">';
 
-      <input class="from-input" required type="text" name ="type_good" placeholder=" Тип товару">
-      <input class="from-input" required type="text" name ="type_cases" placeholder=" Тип Чохла">
-      <input class="from-input" required type="text" name ="brand" placeholder=" Бренд Чохла">
-      <input class="from-input" required type="text" name ="phone_brand" placeholder=" Марка телефона ">
-      <input class="from-input" required type="text" name ="phone_model" placeholder=" Модель">
-      <input class="from-input" required type="text" name ="color" placeholder=" Колір ">
-      <input class="from-input-date" required type="date" name ="date" placeholder="">
-      <input class="from-input" required type="text" name ="price" placeholder=" ₴Ціна">
-
-
-      <input class="from-input-submit" type="submit" placeholder=" Тип товару">
-    </form>
-
-    </div>
-    <div id="existing-case">
-
-    <h1 class="top-text-new-r-case">Додати Існуючий чохол </h1>
-    <form class="input-right-form" action="check-new-cases.php" method="post">
-  <?php
-        require "connect.php";
-              echo '<select class="select"  name="type_good">';
-              echo '<option  class="option" selected disabled>Тип товару</option>';
-              $query = "SELECT DISTINCT `type_good` AS 'type-good' FROM `cases` ";
-                  if($result = mysqli_query($mysql,$query)){
-                      while($row = mysqli_fetch_assoc($result)){
-                          echo '<option class="option">'.$row["type-good"].'</option>';
-                      }
-                      mysqli_free_result($result); // видалення
-          }
-            echo '</select>';
-  ?>
-  <?php
-        require "connect.php";
-              echo '<select class="select"  name="type_cases">';
-              echo '<option  class="option" selected disabled>Тип чохла</option>';
-              $query = "SELECT DISTINCT `type_case` AS 'type-case' FROM `cases` ";
-                  if($result = mysqli_query($mysql,$query)){
-                      while($row = mysqli_fetch_assoc($result)){
-                          echo '<option class="option">'.$row["type-case"].'</option>';
-                      }
-                      mysqli_free_result($result); // видалення
-          }
-            echo '</select>';
-  ?>
-
-  <?php
-        require "connect.php";
-              echo '<select class="select"  name="brand">';
-              echo '<option  class="option" selected disabled>Бренд Чохла </option>';
-              $query = "SELECT DISTINCT `case_brand` AS 'case_brand' FROM `cases` ";
-                  if($result = mysqli_query($mysql,$query)){
-                      while($row = mysqli_fetch_assoc($result)){
-                          echo '<option class="option">'.$row["case_brand"].'</option>';
-                      }
-                      mysqli_free_result($result); // видалення
-          }
-            echo '</select>';
-  ?>
-  <?php
-        require "connect.php";
-              echo '<select class="select"  name="phone_brand">';
-              echo '<option  class="option" selected disabled>Марка телефона</option>';
-              $query = "SELECT DISTINCT `phone_brand` AS 'phone_brand' FROM `cases` ";
-                  if($result = mysqli_query($mysql,$query)){
-                      while($row = mysqli_fetch_assoc($result)){
-                          echo '<option class="option">'.$row["phone_brand"].'</option>';
-                      }
-                      mysqli_free_result($result); // видалення
-          }
-            echo '</select>';
-  ?>
-  <?php
-        require "connect.php";
-              echo '<select class="select"  name="phone_model">';
-              echo '<option  class="option" selected disabled>Модель</option>';
-              $query = "SELECT DISTINCT `phone_model` AS 'phone_model' FROM `cases` ";
-                  if($result = mysqli_query($mysql,$query)){
-                      while($row = mysqli_fetch_assoc($result)){
-                          echo '<option class="option">'.$row["phone_model"].'</option>';
-                      }
-                      mysqli_free_result($result); // видалення
-          }
-            echo '</select>';
-  ?>
-  <?php
-        require "connect.php";
-              echo '<select class="select"  name="color">';
-              echo '<option  class="option" selected disabled>Колір</option>';
-              $query = "SELECT DISTINCT `color` AS 'color' FROM `cases` ";
-                  if($result = mysqli_query($mysql,$query)){
-                      while($row = mysqli_fetch_assoc($result)){
-                          echo '<option class="option">'.$row["color"].'</option>';
-                      }
-                      mysqli_free_result($result); // видалення
-          }
-            echo '</select>';
-  ?>
-
-    <input class="from-input-date" name="date" type="date" placeholder="">
-
-
-    <?php
-          require "connect.php";
-                echo '<select class="select"  name="price">';
-                echo '<option  class="option" selected disabled>₴Ціна</option>';
-                $query = "SELECT DISTINCT `price` AS 'price' FROM `cases` ";
-                    if($result = mysqli_query($mysql,$query)){
-                        while($row = mysqli_fetch_assoc($result)){
-                            echo '<option class="option">'.$row["price"].'</option>';
-                        }
-                        mysqli_free_result($result); // видалення
-            }
-              echo '</select>';
-    ?>
+?>
       <input class="from-input-submit" type="submit" placeholder="">
     </form>
 
@@ -273,8 +245,8 @@ mysqli_close($mysql);
     var checkBox = document.getElementById("switch");
 
     // Get the output text
-  var block_case_new = document.getElementById("new-case");
-  var block_case_exsiting = document.getElementById("existing-case");
+  var block_case_new = document.getElementById("first-page");
+  var block_case_exsiting = document.getElementById("second-page");
 
 
     // If the checkbox is checked, display the output text
@@ -288,14 +260,23 @@ mysqli_close($mysql);
     }
     </script>
     <script>
+    const mediaQuery = window.matchMedia('(min-width: 1100px)')
 
-    $('.js-pscroll').each(function(){
-      var ps = new PerfectScrollbar(this);
+    // Check if the media query is true
+    if (mediaQuery.matches) {
+      $('.js-pscroll').each(function(){
+        var ps = new PerfectScrollbar(this);
 
-      $(window).on('resize', function(){
-        ps.update();
-      })
-    });
+        $(window).on('resize', function(){
+          ps.update();
+        })
+      });
+    }else{
+console.log('nema')
+
+
+
+}
 
 
     </script>

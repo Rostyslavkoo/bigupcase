@@ -4,12 +4,12 @@ $type_good = filter_var($_POST['type_good'],
     FILTER_SANITIZE_STRING);
     $type_good = mb_strtolower($type_good);
 
-$type_cases = mb_strtolower($_POST['type_cases']);
+$case_type = mb_strtolower($_POST['case_type']);
 
 
-$brand = filter_var($_POST['brand'],
+$case_brand = filter_var($_POST['case_brand'],
     FILTER_SANITIZE_STRING);
-    $brand = mb_strtolower($brand);
+    $case_brand = mb_strtolower($case_brand);
 
 $phone_brand = filter_var($_POST['phone_brand'],
     FILTER_SANITIZE_STRING);
@@ -23,18 +23,25 @@ $color = filter_var($_POST['color'],
     FILTER_SANITIZE_STRING);
     $color = mb_strtolower($color);
 
+$cod = filter_var($_POST['cod'],
+    FILTER_SANITIZE_STRING);
+    $cod = mb_strtolower($cod);
+
 $date = filter_var($_POST['date'],
     FILTER_SANITIZE_STRING);
     $date = mb_strtolower($date);
 
-$price = filter_var($_POST['price'],
+$first_price = filter_var($_POST['first_price'],
     FILTER_SANITIZE_STRING);
-    $price = mb_strtolower($price);
+    $first_price = mb_strtolower($first_price);
 
 require "connect.php";
 
-  $mysql->query("INSERT INTO `cases`(`type_good`,`type_case`,`case_brand`,`phone_brand`,`phone_model`,`color`,`date`,`price`)
-  VALUES('$type_good','$type_cases','$brand','$phone_brand','$phone_model','$color', '$date','$price')"); //  вношу дані в таблицю 'sold'
+  $mysql->query("INSERT INTO `all_avaible_goods`(`type_good`,`case_type`,`case_brand`,`phone_brand`,`phone_model`,`color`,`cod`,`date`,`first_price`)
+  VALUES('$type_good','$case_type','$case_brand','$phone_brand','$phone_model','$color','$cod', '$date','$first_price')"); //  вношу дані в таблицю 'sold'
+
+  $mysql->query("INSERT INTO `all_goods`(`type_good`,`case_type`,`case_brand`,`phone_brand`,`phone_model`,`color`,`cod`,`date`,`first_price`)
+  VALUES('$type_good','$case_type','$case_brand','$phone_brand','$phone_model','$color','$cod', '$date','$first_price')"); //  вношу дані в таблицю 'sold'
 
         // if(isset($_POST['s_cod'])){
         //   require "connect.php";

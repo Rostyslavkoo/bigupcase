@@ -160,7 +160,7 @@ eval("\r\n\r\nvar searchBox = document.querySelectorAll('.search-box input[type=
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("const t_switch = document.getElementById(\"t_switch\");\r\nvar checkBox = document.getElementById(\"switch\");\r\n\r\nvar block_case_new = document.getElementById(\"new-case\");\r\nvar block_case_exsiting = document.getElementById(\"existing-case\");\r\n\r\nfunction check() {\r\n  checkBox.checked = true;\r\n  block_case_new.style.display = \"none\";\r\n      block_case_exsiting.style.display = \"block\";\r\n}\r\n\r\nfunction uncheck() {\r\n    checkBox.checked = false;\r\n    block_case_new.style.display = \"block\";\r\n    block_case_exsiting.style.display = \"none\";\r\n}\r\n\r\nt_switch.addEventListener('click', event => {\r\n  if(checkBox.checked == true){\r\n     uncheck()\r\n  }else {\r\n    check();\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/assets/js/t_switch.js?");
+eval("const t_switch = document.getElementById(\"t_switch\");\r\nvar checkBox = document.getElementById(\"switch\");\r\n\r\nvar block_case_new = document.getElementById(\"first-page\");\r\nvar block_case_exsiting = document.getElementById(\"second-page\");\r\n\r\nfunction check() {\r\n  checkBox.checked = true;\r\n  block_case_new.style.display = \"none\";\r\n      block_case_exsiting.style.display = \"block\";\r\n}\r\n\r\nfunction uncheck() {\r\n    checkBox.checked = false;\r\n    block_case_new.style.display = \"block\";\r\n    block_case_exsiting.style.display = \"none\";\r\n}\r\n\r\nt_switch.addEventListener('click', event => {\r\n  if(checkBox.checked == true){\r\n     uncheck()\r\n  }else {\r\n    check();\r\n  }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/assets/js/t_switch.js?");
 
 /***/ }),
 
