@@ -1088,7 +1088,7 @@ th, td {
 .right-side {
   width: 35%;
   height: 100%;
-  padding: 4rem;
+  padding: 2rem;
   background-color: #EBF3FF; }
   @media (max-width: 1100px) {
     .right-side {
@@ -1103,7 +1103,6 @@ th, td {
   width: 100%;
   margin: 0 auto;
   border-radius: 3rem;
-  padding: 2rem;
   background-color: white;
   box-shadow: 1px 2px 9px 5px rgba(0, 0, 0, 0.25); }
   @media (max-width: 540px) {
@@ -1115,7 +1114,7 @@ th, td {
   text-align: center;
   font-size: 2rem;
   color: #9871EB;
-  padding-top: 2rem; }
+  padding-top: 1rem; }
 
 .selector-case-new {
   text-align: right;
@@ -1126,7 +1125,7 @@ th, td {
 .selector-case-existing {
   display: block;
   text-align: right;
-  padding-right: 10rem;
+  padding-right: 20%;
   padding-top: 2rem;
   font-size: 2rem;
   cursor: pointer; }
@@ -1292,7 +1291,7 @@ select:focus {
 
 .rep-th {
   width: 15rem;
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
   font-weight: bold;
   font-size: 1.7rem; }
 

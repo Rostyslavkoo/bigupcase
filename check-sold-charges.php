@@ -4,20 +4,19 @@ $type_good = filter_var($_POST['type_good'],
     FILTER_SANITIZE_STRING);
     $type_good = mb_strtolower($type_good);
 
-$case_type = mb_strtolower($_POST['case_type']);
+$charge_type = mb_strtolower($_POST['charge_type']);
 
-
-$case_brand = filter_var($_POST['case_brand'],
+$charge_brand = filter_var($_POST['charge_brand'],
     FILTER_SANITIZE_STRING);
-    $case_brand = mb_strtolower($case_brand);
+    $case_brand = mb_strtolower($charge_brand);
 
-$phone_brand = filter_var($_POST['phone_brand'],
+$charge_model = filter_var($_POST['charge_model'],
     FILTER_SANITIZE_STRING);
-    $phone_brand = mb_strtolower($phone_brand);
+    $charge_model = mb_strtolower($charge_model);
 
-$phone_model = filter_var($_POST['phone_model'],
+$charge_input = filter_var($_POST['charge_input'],
     FILTER_SANITIZE_STRING);
-    $phone_model = mb_strtolower($phone_model);
+    $charge_input = mb_strtolower($charge_input);
 
 $color = filter_var($_POST['color'],
     FILTER_SANITIZE_STRING);
@@ -31,14 +30,15 @@ $date = filter_var($_POST['date'],
     FILTER_SANITIZE_STRING);
     $date = mb_strtolower($date);
 
+
 $last_price = filter_var($_POST['last_price'],
     FILTER_SANITIZE_STRING);
     $first_price = mb_strtolower($last_price);
 
 require "connect.php";
 
-$mysql->query("INSERT INTO `all_sold_goods`(`type_good`,`case_type`,`case_brand`,`phone_brand`,`phone_model`,`color`,`cod`,`date`,`last_price`)
-VALUES('$type_good','$case_type','$case_brand','$phone_brand','$phone_model','$color','$cod', '$date','$last_price')"); //  вношу дані в таблицю 'sold'
+$mysql->query("INSERT INTO `all_sold_goods`(`type_good`,`charge_type`,`charge_model`,`charge_input`,`charge_brand`,`color`,`cod`,`date`,`last_price`)
+VALUES('$type_good','$charge_type','$charge_model','$charge_input','$charge_brand','$color','$cod', '$date','$last_price')"); //  вношу дані в таблицю 'sold'
 
 
         if(isset($_POST['cod'])){
@@ -60,4 +60,4 @@ if(isset($_POST['cod'])){
 mysqli_close($mysql);
 }
 
-header("Location:sold_cases.php");
+header("Location:sold_charges.php");

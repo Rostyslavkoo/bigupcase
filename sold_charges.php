@@ -14,7 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
-    <title>SoldCases | Home</title>
+    <title>SoldCharges | Home</title>
 
 </head>
 <body>
@@ -49,7 +49,7 @@
 
 
 <div class="left-side">
-  <h1 class="top-avaible-text">Таблиця проданих чохлів</h1>
+  <h1 class="top-avaible-text">Таблиця проданих зарядок</h1>
 
 
 <div class="search-box">
@@ -85,7 +85,8 @@
         echo '<table class="table table-hover table-sm" , id="info-table", width="500">  <tr>';
         echo "<tbody>";
 
-        $query = "SELECT `id`, concat(`case_type`,' ',`case_brand`,' ',`phone_brand`,' ',`phone_model`)as'content',`color`,`cod`,`date`,`last_price` FROM `all_sold_goods`WHERE `type_good` like 'чохол' Order BY id DESC ";
+        $query = "SELECT `id`, concat(`type_good`,' ',`charge_type`,' ',`charge_brand`,' ',`charge_model`,' ',`charge_input`)as'content',`color`,`cod`,`date`,`last_price`
+        FROM `all_sold_goods` WHERE `type_good` like 'зарядка' order by id desc";
         $i=0;
 
         //$numrows = mysqli_num_rows( $query);
@@ -122,7 +123,7 @@
 
   <div class="right-side">
       <div class="right-form">
-        <h1 class="selector-case-existing" id="t_switch">Додати чохол</h1>
+        <h1 class="selector-case-existing" id="t_switch">Додати зарядку</h1>
     <div class="div-checkbox">
     <nav>
       <input type="checkbox"  id="switch" onclick="myFunction()" /><label for="switch">Toggle</label>
@@ -142,7 +143,7 @@
 
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT count(phone_brand)as'case_type' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'iphone' ";
+      $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'lightning' ";
 
       $i=0;
 
@@ -150,9 +151,9 @@
       if ($result = mysqli_query($mysql, $iphone_cout)) {
 
       while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
-      echo '<td class="rep-td">Iphone:</td>'.
+      echo '<td class="rep-td">Lightning:</td>'.
       '<td class="rep-td">'.
-      $row["case_type"].'шт.'.'</td>'.
+      $row["charge_input"].'шт.'.'</td>'.
       '<td class="rep-td">'.'₴'.
       $row["last_price"].'</td>';
 
@@ -166,7 +167,7 @@
 
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT count(phone_brand)as'case_type' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'xiaomi' ";
+      $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'micro-usb' ";
 
       $i=0;
 
@@ -174,9 +175,9 @@
       if ($result = mysqli_query($mysql, $iphone_cout)) {
 
       while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
-      echo '<td class="rep-td">Xiaomi:</td>'.
+      echo '<td class="rep-td">Micro-usb:</td>'.
       '<td class="rep-td">'.
-      $row["case_type"].'шт.'.'</td>'.
+      $row["charge_input"].'шт.'.'</td>'.
       '<td class="rep-td">'.'₴'.
       $row["last_price"].'</td>';
 
@@ -189,7 +190,7 @@
     </tr>
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT count(phone_brand)as'case_type' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'samsung' ";
+    $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'type-c' ";
 
       $i=0;
 
@@ -197,9 +198,9 @@
       if ($result = mysqli_query($mysql, $iphone_cout)) {
 
       while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
-      echo '<td class="rep-td">Samsung:</td>'.
+      echo '<td class="rep-td">Type-c:</td>'.
       '<td class="rep-td">'.
-      $row["case_type"].'шт.'.'</td>'.
+      $row["charge_input"].'шт.'.'</td>'.
       '<td class="rep-td">'.'₴'.
       $row["last_price"].'</td>';
 
@@ -212,7 +213,7 @@
     </tr>
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT count(phone_brand)as'case_type' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'huawei' ";
+  $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'блок живлення' ";
 
       $i=0;
 
@@ -220,9 +221,9 @@
       if ($result = mysqli_query($mysql, $iphone_cout)) {
 
       while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
-      echo '<td class="rep-td">Huawei:</td>'.
+      echo '<td class="rep-td">Блоки:</td>'.
       '<td class="rep-td">'.
-      $row["case_type"].'шт.'.'</td>'.
+      $row["charge_input"].'шт.'.'</td>'.
       '<td class="rep-td">'.'₴'.
       $row["last_price"].'</td>';
 
@@ -235,7 +236,7 @@
     </tr>
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT count(phone_brand)as'case_type' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'інше' ";
+      $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'інше' ";
 
       $i=0;
 
@@ -245,7 +246,7 @@
       while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
       echo '<td class="rep-td">Інше:</td>'.
       '<td class="rep-td">'.
-      $row["case_type"].'шт.'.'</td>'.
+      $row["charge_input"].'шт.'.'</td>'.
       '<td class="rep-td">'.'₴'.
       $row["last_price"].'</td>';
 
@@ -257,7 +258,7 @@
        ?>
     </tr>
     <?php
-    $iphone_cout = "SELECT count(phone_brand)as'case_type' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` where type_good like 'чохол' ";
+    $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`last_price`)as'last_price' FROM `all_sold_goods` where type_good like 'зарядка'";
 
     $i=0;
 
@@ -267,7 +268,7 @@
     while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
     echo '<td class="rep-th">Загалом:</td>'.
     '<td class="rep-th">'.
-    $row["case_type"].'шт.'.'</td>'.
+    $row["charge_input"].'шт.'.'</td>'.
     '<td class="rep-th">'.'₴'.
     $row["last_price"].'</td>';
 
@@ -290,8 +291,8 @@
     </tr>
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT sum(`first_price`)as'first_price' FROM `all_goods`WHERE `phone_brand` like 'iphone' and sold ='1'";
-      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'iphone' ";
+      $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`first_price`)as'first_price' FROM `all_goods` WHERE `charge_input` like 'lightning' && sold ='1'";
+      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'lightning' ";
       $i=0;
 
       if ($result = mysqli_query($mysql, $last_price)) {
@@ -307,7 +308,7 @@
       if ($result = mysqli_query($mysql, $iphone_cout)) {
       while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
   $income = $last_price - $row["first_price"];
-      echo '<td class="rep-td">Iphone:</td>'.
+      echo '<td class="rep-td">Lightning:</td>'.
       '<td class="rep-td">'.'₴'.
       $row["first_price"].'</td>'.
       '<td class="rep-td">'.'₴'.
@@ -323,8 +324,8 @@
     </tr>
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT sum(`first_price`)as'first_price' FROM `all_goods` WHERE `phone_brand` like 'xiaomi' and sold ='1'";
-      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'xiaomi' ";
+      $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`first_price`)as'first_price' FROM `all_goods` WHERE `charge_input` like 'micro-usb' && sold ='1'";
+      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'micro-usb' ";
       $i=0;
 
       if ($result = mysqli_query($mysql, $last_price)) {
@@ -340,7 +341,7 @@
       if ($result = mysqli_query($mysql, $iphone_cout)) {
       while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
   $income = $last_price - $row["first_price"];
-      echo '<td class="rep-td">Xiaomi:</td>'.
+      echo '<td class="rep-td">Micro-usb:</td>'.
       '<td class="rep-td">'.'₴'.
       $row["first_price"].'</td>'.
       '<td class="rep-td">'.'₴'.
@@ -356,8 +357,8 @@
     </tr>
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT sum(`first_price`)as'first_price' FROM `all_goods` WHERE `phone_brand` like 'samsung'  and sold ='1'";
-      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'samsung' ";
+      $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`first_price`)as'first_price' FROM `all_goods` WHERE `charge_input` like 'type-c' && sold ='1'";
+      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'type-c' ";
       $i=0;
 
       if ($result = mysqli_query($mysql, $last_price)) {
@@ -373,7 +374,7 @@
       if ($result = mysqli_query($mysql, $iphone_cout)) {
       while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
   $income = $last_price - $row["first_price"];
-      echo '<td class="rep-td">Samsung:</td>'.
+      echo '<td class="rep-td">Type-c:</td>'.
       '<td class="rep-td">'.'₴'.
       $row["first_price"].'</td>'.
       '<td class="rep-td">'.'₴'.
@@ -389,8 +390,8 @@
     </tr>
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT sum(`first_price`)as'first_price' FROM `all_goods` WHERE `phone_brand` like 'huawei' and sold ='1' ";
-      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'huawei' ";
+      $iphone_cout = "SELECT count(charge_input)as'charge_input' ,sum(`first_price`)as'first_price' FROM `all_goods` WHERE `charge_input` like 'блок живлення' && sold ='1'";
+      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'блок живлення' ";
       $i=0;
 
       if ($result = mysqli_query($mysql, $last_price)) {
@@ -406,7 +407,7 @@
       if ($result = mysqli_query($mysql, $iphone_cout)) {
       while ($row = mysqli_fetch_assoc($result)) { // вибираю дані з ас масиву
   $income = $last_price - $row["first_price"];
-      echo '<td class="rep-td">Huawei:</td>'.
+      echo '<td class="rep-td">Блок:</td>'.
       '<td class="rep-td">'.'₴'.
       $row["first_price"].'</td>'.
       '<td class="rep-td">'.'₴'.
@@ -422,8 +423,8 @@
     </tr>
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT sum(`first_price`)as'first_price' FROM `all_goods` WHERE `phone_brand` like 'інше'  and sold ='1'";
-      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `phone_brand` like 'інше' ";
+      $iphone_cout = "SELECT sum(`first_price`)as'first_price' FROM `all_goods` WHERE `charge_input` like 'інше'  and sold ='1'";
+      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` WHERE `charge_input` like 'інше' ";
       $i=0;
 
       if ($result = mysqli_query($mysql, $last_price)) {
@@ -455,8 +456,8 @@
     </tr>
     <tr class="rep-tr">
       <?php
-      $iphone_cout = "SELECT sum(`first_price`)as'first_price' FROM `all_goods`  where sold ='1' && type_good like 'чохол'";
-      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` where type_good like 'чохол' ";
+      $iphone_cout = "SELECT sum(`first_price`)as'first_price' FROM `all_goods`  where `sold` ='1' && `type_good` ='зарядка'";
+      $last_price = "SELECT sum(`last_price`)as'last_price' FROM `all_sold_goods` where `type_good` ='зарядка'";
       $i=0;
 
       if ($result = mysqli_query($mysql, $last_price)) {
@@ -494,98 +495,99 @@
 
       <div id="second-page">
           <h1 class="top-text-new-r-case">Додати чохол до проданих   </h1>
-          <form class="input-right-form" action="check-sold-cases.php" method="post">
+          <form class="input-right-form" action="check-sold-charges.php" method="post">
+    <?php
+    require "connect.php";
+          echo '<select class="select"  name="type_good">';
+          echo '<option  class="option" selected disabled>Тип товару</option>';
+          $query = "SELECT DISTINCT `type_good` AS 'type_good' FROM `all_avaible_goods`WHERE `type_good` like 'зарядка' ";
+              if($result = mysqli_query($mysql,$query)){
+                  while($row = mysqli_fetch_assoc($result)){
+                      echo '<option class="option">'.$row["type_good"].'</option>';
+                  }
+                  mysqli_free_result($result); // видалення
+      }
+        echo '</select>';
 
-            <?php
-            require "connect.php";
-                  echo '<select class="select"  name="type_good">';
-                  echo '<option  class="option" selected disabled>Тип товару</option>';
-                  $query = "SELECT DISTINCT `type_good` AS 'type_good' FROM `all_avaible_goods`WHERE `type_good` like 'Чохол' ";
-                      if($result = mysqli_query($mysql,$query)){
-                          while($row = mysqli_fetch_assoc($result)){
-                              echo '<option class="option">'.$row["type_good"].'</option>';
-                          }
-                          mysqli_free_result($result); // видалення
-              }
-                echo '</select>';
+        echo '<select class="select"  name="charge_brand">';
+        echo '<option  class="option" selected disabled>Бренд зарядки </option>';
+        $query = "SELECT DISTINCT `charge_brand` AS 'charge_brand' FROM `all_avaible_goods`WHERE `type_good` like 'зарядка'";
+        if($result = mysqli_query($mysql,$query)){
+          while($row = mysqli_fetch_assoc($result)){
+            echo '<option class="option">'.$row["charge_brand"].'</option>';
+          }
+          mysqli_free_result($result); // видалення
+        }
+        echo '</select>';
 
-                  echo '<select class="select"  name="case_type">';
-                  echo '<option  class="option" selected disabled>Тип чохла</option>';
-                  $query = "SELECT DISTINCT `case_type` AS 'case_type' FROM `all_avaible_goods` WHERE `type_good` like 'Чохол'";
-                      if($result = mysqli_query($mysql,$query)){
-                          while($row = mysqli_fetch_assoc($result)){
-                              echo '<option class="option">'.$row["case_type"].'</option>';
-                          }
-                          mysqli_free_result($result); // видалення
-              }
-                echo '</select>';
-
-
-                  echo '<select class="select"  name="case_brand">';
-                  echo '<option  class="option" selected disabled>Бренд Чохла </option>';
-                  $query = "SELECT DISTINCT `case_brand` AS 'case_brand' FROM `all_avaible_goods`WHERE `type_good` like 'Чохол' ";
-                      if($result = mysqli_query($mysql,$query)){
-                          while($row = mysqli_fetch_assoc($result)){
-                              echo '<option class="option">'.$row["case_brand"].'</option>';
-                          }
-                          mysqli_free_result($result); // видалення
-              }
-                echo '</select>';
-
-                  echo '<select class="select"  name="phone_brand">';
-                  echo '<option  class="option" selected disabled>Марка телефона</option>';
-                  $query = "SELECT DISTINCT `phone_brand` AS 'phone_brand' FROM `all_avaible_goods`WHERE `type_good` like 'Чохол' ";
-                      if($result = mysqli_query($mysql,$query)){
-                          while($row = mysqli_fetch_assoc($result)){
-                              echo '<option class="option">'.$row["phone_brand"].'</option>';
-                          }
-                          mysqli_free_result($result); // видалення
-              }
-                echo '</select>';
-
-                  echo '<select class="select"  name="phone_model">';
-                  echo '<option  class="option" selected disabled>Модель</option>';
-                  $query = "SELECT DISTINCT `phone_model` AS 'phone_model' FROM `all_avaible_goods`WHERE `type_good` like 'Чохол' ";
-                      if($result = mysqli_query($mysql,$query)){
-                          while($row = mysqli_fetch_assoc($result)){
-                              echo '<option class="option">'.$row["phone_model"].'</option>';
-                          }
-                          mysqli_free_result($result); // видалення
-              }
-                echo '</select>';
-
-                  echo '<select class="select"  name="color">';
-                  echo '<option  class="option" selected disabled>Колір</option>';
-                  $query = "SELECT DISTINCT `color` AS 'color' FROM `all_avaible_goods`WHERE `type_good` like 'Чохол' ";
-                      if($result = mysqli_query($mysql,$query)){
-                          while($row = mysqli_fetch_assoc($result)){
-                              echo '<option class="option">'.$row["color"].'</option>';
-                          }
-                          mysqli_free_result($result); // видалення
-              }
-                echo '</select>';
-
-                echo '<select class="select"  name="cod">';
-                echo '<option  class="option" selected disabled>Код</option>';
-                $query = "SELECT DISTINCT `cod` AS 'cod' FROM `all_avaible_goods`WHERE `type_good` like 'Чохол' ";
-                    if($result = mysqli_query($mysql,$query)){
-                        while($row = mysqli_fetch_assoc($result)){
-                            echo '<option class="option">'.$row["cod"].'</option>';
-                        }
-                        mysqli_free_result($result); // видалення
-            }
-              echo '</select>';
-
-            echo'<input class="from-input-date" name="date" type="date" placeholder="">';
-
-            echo'<input class="from-input" name="last_price" type="text" placeholder="₴Ціна">';
+          echo '<select class="select"  name="charge_type">';
+          echo '<option  class="option" selected disabled>Матеріал зарядки</option>';
+          $query = "SELECT DISTINCT `charge_type` AS 'charge_type' FROM `all_avaible_goods`WHERE `type_good` like 'зарядка'";
+              if($result = mysqli_query($mysql,$query)){
+                  while($row = mysqli_fetch_assoc($result)){
+                      echo '<option class="option">'.$row["charge_type"].'</option>';
+                  }
+                  mysqli_free_result($result); // видалення
+      }
+        echo '</select>';
 
 
-            ?>
+          echo '<select class="select"  name="charge_model">';
+          echo '<option  class="option" selected disabled>Модель</option>';
+          $query = "SELECT DISTINCT `charge_model` AS 'charge_model' FROM `all_avaible_goods`WHERE `type_good` like 'зарядка'";
+              if($result = mysqli_query($mysql,$query)){
+                  while($row = mysqli_fetch_assoc($result)){
+                      echo '<option class="option">'.$row["charge_model"].'</option>';
+                  }
+                  mysqli_free_result($result); // видалення
+      }
+        echo '</select>';
+          echo '<select class="select"  name="charge_input">';
+          echo '<option  class="option" selected disabled>Порт</option>';
+          $query = "SELECT DISTINCT `charge_input` AS 'charge_input' FROM `all_avaible_goods`WHERE `type_good` like 'зарядка'";
+              if($result = mysqli_query($mysql,$query)){
+                  while($row = mysqli_fetch_assoc($result)){
+                      echo '<option class="option">'.$row["charge_input"].'</option>';
+                  }
+                  mysqli_free_result($result); // видалення
+      }
+        echo '</select>';
 
 
-    <input class="from-input-submit" type="submit" placeholder=" Тип товару">
-  </form>
+          echo '<select class="select"  name="color">';
+          echo '<option  class="option" selected disabled>Колір</option>';
+          $query = "SELECT DISTINCT `color` AS 'color' FROM `all_avaible_goods`WHERE `type_good` like 'зарядка' ";
+              if($result = mysqli_query($mysql,$query)){
+                  while($row = mysqli_fetch_assoc($result)){
+                      echo '<option class="option">'.$row["color"].'</option>';
+                  }
+                  mysqli_free_result($result); // видалення
+      }
+        echo '</select>';
+
+          echo '<select class="select"  name="cod">';
+          echo '<option  class="option" selected disabled>Код</option>';
+          $query = "SELECT DISTINCT `cod` AS 'cod' FROM `all_avaible_goods`WHERE `type_good` like 'зарядка' ";
+              if($result = mysqli_query($mysql,$query)){
+                  while($row = mysqli_fetch_assoc($result)){
+                      echo '<option class="option">'.$row["cod"].'</option>';
+                  }
+                  mysqli_free_result($result); // видалення
+      }
+        echo '</select>';
+
+
+
+
+    echo'<input class="from-input-date" name="date" type="date" placeholder="">';
+
+
+
+    echo'<input class="from-input" name="last_price" type="text" placeholder="₴Ціна">';
+
+    ?>
+          <input class="from-input-submit" type="submit" placeholder="">
+        </form>
 
     </div>
   </div>

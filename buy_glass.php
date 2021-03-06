@@ -32,7 +32,7 @@
   <h1 class="menu-m-t">Наявність</h1>
   <ul class="ul">
     <li class="menu-li" onclick="document.location='index.php'">Чохли</li>
-    <li class="menu-li"onclick="document.location='buy_charges.php'">Зарядки</li>
+    <li class="menu-li" onclick="document.location='buy_charges.php'">Зарядки</li>
     <li class="menu-li"onclick="document.location='buy_glass.php'">Скло</li>
   </ul>
     <hr class="hr">
